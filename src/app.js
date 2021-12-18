@@ -250,3 +250,87 @@ ReactDOM.render(jsx, document.getElementById("app"));
 // push our code to github repository
 // - make sure you are not pushing both bundle.js and style.css onto github becos they are generated files.
 // C:\React-course-projects\xpensify-app6>git status
+// C:\React-course-projects\xpensify-app6>git add .
+// C:\React-course-projects\xpensify-app6>git commit -m "Setup production webpack build"
+// push local git respository to remote git respository with the below command
+// - go to your remote github to refresh the website inorder to see the new files push up remotely.
+
+// A Production Web Server with Express
+// We have different way to serve-up our app which are as following:
+// 1. live-server
+// 2. dev-server
+// the above servers are not suitable for production becos they consume more system resources like memory while express server is light weight server which will be responsible for serving-up our public folder in production.
+// express.js is a javascript library for developing server.
+// - create a folder called server in the root of the project
+// - create server/server.js file
+// - install express library like this
+// C:\React-course-projects\xpensify-app6>yarn add express@4.15.4
+// express server is going to run in the terminal not through webpack.
+// setup server.js file by importing express and create a new express application.
+// after setup basic express server 
+// const path = require("path"); // it is an in-built library
+// const express = require("express"); // importing express
+// const app = express(); // creating new instance of express
+// const publicPath = path.join(__dirname, "..", "public"); // serve-up public folder where u have bundle.js and style.css file
+// app.use(express.static(publicPath))
+// app.listen(3000, ()=>{
+//     console.log("server is up!");
+// });
+// then run it on terminal like this
+// C:\React-course-projects\xpensify-app6>node server/server.js
+// its return this server is up! on the terminal which means your server is working
+// go to this url http://localhost:3000/ on your browser
+// its throw an error becos it doesn't have access to bundle.js and style.css the assest to serve-up.
+// - startup product server like this
+// C:\React-course-projects\xpensify-app6>yarn run build:prod
+// re-run express server like this
+// C:\React-course-projects\xpensify-app6>node server/server.js
+// refresh to view your app on the browser
+// - click on create Expense tab and refresh the browser its will show this error
+// Cannot GET /create
+// this is becos their is not create file inside public folder
+// - to solve the issue we need to serve-up indes.html file anytime a page is request by a user inside server/server.js file like this
+// app.get("*", (req, res)=>{
+//     res.sendFile(path.join(publicPath, "index.html"));
+// });
+// - shutdown the express server and startup again like this
+// C:\React-course-projects\xpensify-app6>node server/server.js
+// click on Create Expense tab again and refresh the browser, you will see that the issue as being fixed
+
+// Deploying with Heroku
+// Heroku is a cloud platform for hosting both backend and frontend apps.
+// go to heroku.com, Login or Sign-Up
+// Login: username and password
+// Deployment to Heroku will be from the command line which is heroku cli
+// google search heroku cli, click on The Heroku CLI, click on Download and install, click 64-bit installer
+// Install Heroku cli
+// C:\React-course-projects\xpensify-app6>npm install -g heroku
+// C:\React-course-projects\xpensify-app6>heroku --version
+// C:\React-course-projects\xpensify-app6>heroku login
+// C:\React-course-projects\xpensify-app6>heroku create react-expensify18
+// it will use the above name to create url and github for you like this
+// url: https://react-expensify18.herokuapp.com/ | https://git.heroku.com/react-expensify18.git
+// C:\React-course-projects\xpensify-app6>git remote
+// heroku
+// origin
+// C:\React-course-projects\xpensify-app6>git remote -v
+// heroku  https://git.heroku.com/react-expensify18.git (fetch)
+// heroku  https://git.heroku.com/react-expensify18.git (push)
+// origin  https://github.com/Hussenat/react-filter2021.git (fetch)
+// origin  https://github.com/Hussenat/react-filter2021.git (push)
+// the above command give you more details on heroku and origin
+// to teach heroku how to startup express server
+// open package.json add start property on to scripts object like this
+// "start": "node server/server.js"
+// -open server/server.js to add dynamic port number which will be use by heroku becos http://localhost:3000/ is a local port number for development purpose.
+// const port = process.env.PORT || 3000;
+// the above line of code will make our express server compartiable with heroku.
+// - to teach heroku how to run webpack.config file
+// by adding this property "heroku-postbuild": "yarn run build:prod" onto script object in package.json
+// its will run webpack once, after our project dependencies has already being executed.
+// - add the following assests in public folder to gitignore file like this
+// public/bundle.js
+// public/bundle.js.map
+// public/styles.css
+// public/styles.css.map
+// C:\React-course-projects\xpensify-app6>git status

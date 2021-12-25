@@ -339,4 +339,3 @@ ReactDOM.render(jsx, document.getElementById("app"));
 // C:\React-course-projects\xpensify-app6>git push
 // C:\React-course-projects\xpensify-app6>git push heroku main
 // C:\React-course-projects\xpensify-app6>heroku open
-// C:\React-course-projects\xpensify-app6>heroku open

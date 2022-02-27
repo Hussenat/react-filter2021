@@ -1,341 +1,227 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import AppRouter from "./routers/AppRouter";
-import configureStore from "./store/configureStore";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
+import AppRouter from "./routers/AppRouter";
+import configureStore from "./store/configureStore";
 import "react-dates/lib/css/_datepicker.css";
+import { firebase } from "./firebase/firebase.js";
+// import "./playground/promises.js";
 
-// Store
-const store = configureStore(); 
-console.log("testing.........")
-
+//store
+const store = configureStore();
+// console.log("testing........");
 const jsx = (
-    <Provider store={store}>
-        <AppRouter />
-    </Provider>
-)
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
 ReactDOM.render(jsx, document.getElementById("app"));
+//- open each file that makeup the expensify app to remove unneceessary codes
+// C:\react-course-projects032021\xpensify-app7>npm run dev-server
+//C:\react-course-projects032021\xpensify-app7>npm run test --watch
 
-// Open your component on after the other to remove all unnecessary comments
-// startup jest suit like this
+//firebasen database
+//perfoming crude (Creating Updating Deleting) operation with firebase database.
+
+//Getting Firebase
+//- go to firebase.google.com to Login or signup for firebase db
+//- you must sign-up with your google account
+//- clock on Go to Console
+//- click on Add Project
+//- Enter your project name: react-expensify2022 and click on Continue Button
+//- click on Create project
+//- our focus on firebase are Authentication(whcih verifies the user) and Realtime Database
+//- firebase database is a no sql database that look like javascript obect which contain properties and values
+//- click Realtime Database, click on Create button
+//- click on Rules tab inorder to change the rules from false to true
+
+//- cllck on Publish to save the new rules setting
+//- click on Project Overview
+//- go to Get Started by adding Firebase to your app then click on web </> icon
+//- Register app: react-expensify2022
+
+//- click on Register app button
+//- Click on Continue to console
+//- click on icon beside project overview then click on Project setting to view firebase configuration settings
+//- install firebase like this
+//C:\react-course-projects032021\xpensify-app7>npm install firebase@4.2.0
+//- create a folder called firebase inside src
+//- create firebase.js file inside src
+//- setup firebase.js file by doing the following
+
+// import * as firebase from "firebase"
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAgCJ_-GG5_nDlqTNfNvE9xiqr5moeBzfc",
+//   authDomain: "react-expensify2022.firebaseapp.com",
+//   databaseURL: "https://react-expensify2022-default-rtdb.firebaseio.com",
+//   projectId: "react-expensify2022",
+//   storageBucket: "react-expensify2022.appspot.com",
+//   messagingSenderId: "910557290398",
+//   appId: "1:910557290398:web:948342a465ba7d0687408f",
+//   measurementId: "G-TKWPGKTKFZ"
+// };
+
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig)
+
+//ES6 Promises
+//- Promises allow us to do something after a long running task
+//- create promises.js file inside src/playground folder
+//- import "./playground/promises" onto app.js to view the file in the browser
+
+//Promises with Firebase
+// - open firebase/firebase.js file to implement promise with firebase.
+
+//Removing Data from firebase
+// - open firebase/firebase.js file to implement remove data from firebase.
+
+//Updating Data from firebase
+/// - open firebase/firebase.js file to implement update data with firebase.
+
+//Fetching Data from firebase
+// -  open firebase/firebase.js file to implement fetching data with firebase.
+
+//Array Data in Firebase: Part I
+// - open firebase/firebase.js file to implement update array with firebase.
+
+//Array Data in Firebase: Part II
+// - open firebase/firebase.js file to implement update array with firebase.
+
+//Firebase with Redux
+//- inorder to connect firebase with redux store we need to implement Asynchronous Redux Action
+//- when someone dispatch asynchronous action we shall update both edux store and firebase this will update the user
+// interface(UI) as well
+
+//Asynchronous Redux Action
+//- integrate all the fiirebase methods we have learnt onto redux store which are CRUDE operation
+//- open src/components/actions/expenses.js inorder to convert the Action Generator Functions to Asynchronous Action
+//Generation functions
+// install redux-thunk like this
+// C:\react-course-projects032021\xpensify-app7>npm install redux-thunk@2.2.0
+//- the above redux-thunk library enable us to return function in our local Action Generator
+//Function instead of object
+//- open src/store/configureStore.js file for modification
+//- import the following onto configureStore.js file
+//import { applyMiddleware, compose } from "redux";
+// change  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//to this
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
+// composeEnhancers(applyMiddleware(thunk))
+//- open firebase/firebase.js file for exporting some predefined methods for the purpose of reusing in other files like this
+// export { firebase, googleAuthProvider, database as default };
+//- open action/expenses.js file for setting up Asynchronous Action Generator Function
+// open components/AddExpensePage.js component to dispatch startAddExpense() Action Generator Function instead of AddExpense() Action Generator Function
+// open firebase database then clear or delete the data inside it.
 // startup dev-server
+// - add expense by clicking Create Expense tab
+// check both the redux and firebase db
 
-// Deploying our app
-// Installing GIT
-// git is a free and open source distributed version control system design to handle from small to very large projects speed and efficiency
-// open terminal then run this comment
-// C:\React-course-projects\xpensify-app6>git --version
+// Testing Async Redux Actions 1
+// since we have change the action Generator Function from addExpense() to startAddExpense() which is asynchronous function we have to modify AddExpense.js component.
+// startup the jest test suit like this
+// C:\React-course-projects\xpensify-app7>npm test -- --watch
+// - you will see src file failing becos of the change we did to src/components/AddExpensePage.js file 
+// its throw this TypeError:_this.props.startAddExpense is not a function.
+// open src/tests/actions/AddExpensePage.test.js file then change all the addExpense() Action Function to startAddExpense() Action Function
+// open src/tests/actions/expenses.test.js file 
+// import expenses from "../fixtures/expenses" onto expenses.test.js 
+// modify this test case "should setup add expense action object with provided values" in expenses.test.js file
+// - remove this test case "should setup and expense action object with default value"
 
-// How git works
-// Initiate our project with git inorder to create either local or remove repository
-// A repository is a git folder that is created on your project implicitly by initializing git.
-// untracked files -> immediately we initialize git on our project, we will have all our files.
-// staged changes -> when issue git add. command, its will move all the untracked files to stage change level. staged changes will not track by git but let you build up your stage for saving or commiting 
-// Commits -> when issue git commit -m "project", its permanently save your files to either local or remote git repository
-// its will generate a code like 1ab49 which mean will ahve tracck files.
-// unstaged changes -> its contain the modify files that git have being tracking. We need to use git add. command to move files from unstage changes to stage changes
+// Testing Async Redux Action 2
+// - still on setting up asynchronous test case in tests/actions/expenses.test.js file
+// "should add expense with default values to database and redux store"
 
-// integrating GIT into our project
-// initializing our project with git from the root of your project like this
-// C:\React-course-projects\xpensify-app6>git init
-// Initialized empty Git repository in C:/React-course-projects/xpensify-app6/.git/
-// open your project on your file explorer to view .git folder which is the local repository on your system
-// C:\React-course-projects\xpensify-app6>git status 
-// the above command will move all your project files to untracked files.
-// -create file called .gitignore in the root folder of your project
-// sometimes the files may be created authomatically for u by vscode
-// gitignore file is use to add files or folders that u did nt want to push to either local or remote github.
-// add node_modules/ onto gitignore file inorder to not push third party folder to github beco's its can be easily regenerated
-// C:\React-course-projects\xpensify-app6>git status to view d untracked files
-// move our files from untracked files to stage changes area by typing this command
-// C:\React-course-projects\xpensify-app6>git add jest.config.json public/ src/
-// the above command will only move the selected files and folder to the stage change area
-// rerun git status to view these files in the stage changes area
-// C:\React-course-projects\xpensify-app6>git add .
-// the above command move all the untracked files to stage changes area  
-// C:\React-course-projects\xpensify-app6>git commit -m "initial commit" 
-// C:\>git config --global user.email "zakariyahhussenat@gmail.com
-// C:\>git config --global user.name "Hussenat"
-// C:\>git config --global user.email
-// zakariyahhussenat@gmail.com
-// C:\React-course-projects\xpensify-app6>git commit -m "initial commit"
-// the above command will move all ur files and folders from stage changes to commit area
-// the -m flag represents message to title your commit or save codes re-run git status
-// open app.js then remove all the action generator function dispatch to redux store manually and all related imports functions as well
-// -once you have deleted all the above and save app.js file git will detect change in app.js file
-// C:\React-course-projects\xpensify-app6>git status
-// C:\React-course-projects\xpensify-app6>git add .
-// C:\React-course-projects\xpensify-app6>git commit -m "remove dummy expenses data"
-// rerun git status
-// C:\React-course-projects\xpensify-app6>git log
-// the above command will log out the various commit that you have made
-// press q to return you to command prompt
-// create readme.md to root folder to write up the git command we have learnt
-
-// Setting up SSH and GIThub
-// SSH -> Secure Shell is a network communication protocol that enable us to communicate with third party services like Github in a secure manner.
-// go to github.com to either login or signup onto remote github
-// click on Respositories New Button 
-// Respository name: react-expenses2021
-// click on Create Repository button
-// Create SSH keys
-// right click on desktop to open Git Bash terminal
-// type this command -al ~/.ssh on Git Bash terminal to check if you have ssh setup before.
-// -google search connect with github with ssh key, click on connecting to Github with SSH
-// click on Generating a new SSH key and adding it to the ssh-agent
-// ssh-keygen -t rsa -b 4096 -C "zakariyahhussenat@gmail.com" and pass it on to the Git Bash terminal
-// -t flag means transaction, -b flag means but 4096 size
-// keep pressing enter until it will generate the public and private ssh key like this
-// SHA256:g2XcC/CEFcMc2g3WZO51XccyfLRtBZLd6NOt91VzKus zakariyahhussenat@gmail.com
-// re type this command ls -al ~/ .ssh on Git Bash terminal
-// its return serials of line of codes containing both public and private key
-// id_rsa this is your private ssh key will be on your system like password
-// id_rsa this is your public ssh key will given out to third party services like github
-// $ eval "$(ssh-agent -s)"
-// if the above command is run its return Agent pid 982
-// the below command provide the path where our private ssh key resistant in our system.
-// ssh-add ~/.ssh/id_rsa
-// it return this: Identity added: /c/Users/Miss Abike/.ssh/id_rsa (zakariyahhussenat@gmail.com)
-// inorder to give our public ssh key to github for secure connection to github.
-// C:\Users\Miss Abike\.ssh\id_rsa.pub with any text editor on your system then copy the
-// go back to https://github.com/Hussenat/react-filter2021
-// click on your profile picture dropdown, click on settings, click on SSH and GPG keys, click on New SSH key button
-// Title: Working on Window
-// Net input field pass what you copy from this path then click on Add SSH button
-// using the command below to make ssh communication to github service 
-// C:\React-course-projects\xpensify-app6>ssh -T git@github.com
-// go back to https://github.com/Hussenat/react-filter2021
-// copy the below code from github website and press enter on the node terminal
-// ggit remote add origin https://github.com/Hussenat/react-filter2021.git
-// git branch -M main
-// git push -u origin main
-// - go back to github website and refresh to view your code on remote github
-
-// Production Webpack
-// - open package.json file to view how to run webpack in our script object like this
-// - C:\React-course-projects\xpensify-app6> yarn run build
-// you will see the size of bundle.js file like this
-// Hash: 80faaa12afb1e357056e
-// Version: webpack 3.1.0
-// Time: 39492ms
-//     Asset     Size  Chunks                    Chunk Names
-// bundle.js  7.96 MB       0  [emitted]  [big]  main
-// next is to reduce or minify the size of bundle.js file for production purpose.
-// modify script object in package.json from
-// "scripts": {
-//     "serve": "live-server public/",
-//     "build": "webpack --watch",
-//     "dev-server": "webpack-dev-server",
-//     "test": "jest --config=jest.config.json"
-//   },
-// to this
-// "scripts": {
-//     "serve": "live-server public/",
-//     "build:dev": "webpack",
-//     "build:prod": "webpack -p",
-//     "dev-server": "webpack-dev-server",
-//     "test": "jest --config=jest.config.json"
-//   },
-// - let run webpack like this
-// C:\React-course-projects\xpensify-app6> yarn run build:prod
-// - the -p flag has reduce the size of the bundle.js
-// from bundle.js  7.96 MB       0  [emitted]  [big]  main
-// to bundle.js  5.61 MB       0  [emitted]  [big]  main
-// - open webpack.config.js file for modification
-// - we are going to return function instead of returning an object becos we want to pass in argument onto the function which will be use to setup the environment for production.
-// - env as an argument onto module.exports() function
-// - re-run the build:prod to see the value of env on the terminal
-// its return env:  undefined
-// - go back to script object in package.json to add --env production like this
-// "build:prod": "webpack -p --env production",
-// re-run the build:prod to see the value of env on the terminal
-// its return env:  production
-// what is taking up the size of bundle.js is the source-map to reduce the size of bundle.js we need source-map that is slow for production
-// - modify devtool property in webpack.config.js
-// from devtool: "cheap-module-eval-source-map",
-// to devtool: isProduction ? "source-map" : "cheap-module-eval-source-map",
-// source-map is very slow when building an application
-// re-run the build for production
-// C:\React-course-projects\xpensify-app6> yarn run build:prod
-// after modifying both package.json and webpack.config.js, its will output these two files
-// Asset     Size  Chunks                    Chunk Names
-//     bundle.js   970 kB       0  [emitted]  [big]  main
-// bundle.js.map  5.34 MB       0  [emitted]         main
-// - for regular users who visit your web app they will be using bundle.js file only which is for production purpose
-// - bundle.js.map will only be use for development purpose
-// check your public folder in the root folder u will see both files
-// let serve up our application in production mode by running our live-server like this
-// C:\React-course-projects\xpensify-app6>yarn run serve
-// open Header component then remove the following
-// <NavLink to="/edit" activeClassName="is-active">Edit Expense</NavLink>
-// <NavLink to="/help" activeClassName="is-active">Help Expense</NavLink> 
-// - for you to see the changes u implement in Header.js component you need to rerun build in production like this
-// C:\React-course-projects\xpensify-app6> yarn run build:prod
-// to generate new bundle.js file
-// C:\React-course-projects\xpensify-app6>yarn run serve
-// - testing of source-map
-// - add console.log("testing") onto app.js
-// C:\React-course-projects\xpensify-app6> yarn run build:prod
-// C:\React-course-projects\xpensify-app6>yarn run serve
-// open browser console to see where console.log("testing"); line is pointing to
-
-// creating separate Css files
-// the following are css files
-// import "normalize.css/normalize.css";
-// import "./styles/styles.scss";
-// import "react-dates/lib/css/_datepicker.css";
-// all the above files are currently residing inside bundle.js file which add more eight onto bundle.js file and these css files will not execute until javascript codes runs which take sometime.
-// C:\React-course-projects\xpensify-app6>yarn add extract-text-webpack-plugin@3.0.0
-// the above library will extract some files out of bundle.js file into a separate file.
-// open webpack.config.js file to import the above library that we just installed like this 
-// const ExtractTextPlugin = require("extract-text-webpack-plugin");
-// - make a new instance of ExtractTextPlugIn like this
-// const CSSExtract = new ExtractTextPlugin("styles.css");
-// the argument style.css is the name of file we are extracting the css code into
-// modify the css section of webpack.config file from
-// {
-//     test: /\.s?css$/,
-//     use: ["style-loader","css-loader", "sass-loader"], 
-// },
-// to this
-// {
-//     test: /\.s?css$/,
-//     use: CSSExtract.extract({
-//         use: ["css-loader", "sass-loader"], 
-//     })
+// Creating a Seperate Test Database
+// - open to see that all the async test case is writing directly to the firebase app database and we don't want that we need to craete a separate firebase database.
+// - install cross-env library for setting environment variable for all operating system like this
+// C:\React-course-projects\xpensify-app7>npm install --dev cross-env@5.0.5
+// - open package.json file to add cross-env environment variable onto test property of scripts object 
+// from "test": "jest --config=jest.config.json", to "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
+// - the above configuration setting means we are using cross-env NODE_ENV=test environment
+// variable for testing purpose only. This environment variable will be set for us by default in production on heroku cloud hosting service.
+// - let create two environment files in the root folder of the application; one for testing and the second for the development purpose. the files names are .env.test and .env.development.
+// - copy all the properties and values inside firebaseConfig object onto the two files like this
+// apiKey: "AIzaSyAuz1K-fcKV90XFbiWS9tqpnM4_YjJQGwU",
+//     authDomain: "xpensify0801.firebaseapp.com",
+//     databaseURL: "https://xpensify0801-default-rtdb.firebaseio.com",
+//     projectId: "xpensify0801",
+//     storageBucket: "xpensify0801.appspot.com",
+//     messagingSenderId: "679359801620",
+//     appId: "1:679359801620:web:a5f5a97d0f6a3f675cfa01",
+//     measurementId: "G-BXCZV2YXBP"
+// // convert the above properties and values into this
+// FIREBASE_API_KEY = AIzaSyAuz1K-fcKV90XFbiWS9tqpnM4_YjJQGwU
+//     FIREBASE_AUTH_DOMAIN = xpensify0801.firebaseapp.com
+//     FIREBASE_DATABASE_URL = https://xpensify0801-default-rtdb.firebaseio.com
+//     FIREBASE_PROJECT_ID = xpensify0801
+//     FIREBASE_STORAGE_BUCKET = xpensify0801.appspot.com
+//     FIREBASE_MESSAGING_SENDER_ID = 679359801620
+//     FIREBASE_APP_ID = 1:679359801620:web:a5f5a97d0f6a3f675cfa01
+//     FIREBASE_MEASUREMENT_ID = G-BXCZV2YXBP 
+// - copy the content of .env.development file onto .env.test file then change properties values to point to different database.
+// - go to firebase.google.com to create a new firebase database for testing purpose.
+// - go to firebase Home Page by clicking on Firebase on the sidebar then click on Add Project after creating db, click on Realtime Database, click on create Database.
+// - click on Rules tab to grant access to all users by changing read and write properties to true then click on Publish Button.
+// - go back to firebase Home Page by clicking on Firebase then click on </> web inorder to copy 
+// firebase configuration setting and paste it on .env.test and set the value onto the properties
+// - install dotenv library to read the environment file like this
+// C:\React-course-projects\xpensify-app7>npm install --dev dotenv@4.0.0
+// open webpack.config.js file to setup the environment variable.
+// process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// if (process.env.NODE_ENV === 'test') {
+//   require('dotenv').config({ path: '.env.test' });
+// } else if(process.env.NODE_ENV === 'development') {
+//   require('dotenv').config({ path: '.env.development' });
 // }
-// we don't need style-loader because its an inline style
-// plugin: [CSSExtract],
-// - the above modification done to webpack.config.js file will extract css files onto styles.css
-// rerun build for production like this
-// C:\React-course-projects\xpensify-app6>yarn run build:prod
-// webpack will output more assets like this
-// Asset      Size  Chunks                    Chunk Names
-//      bundle.js    947 kB       0  [emitted]  [big]  main
-//     styles.css   17.4 kB       0  [emitted]         main
-//  bundle.js.map   5.26 MB       0  [emitted]         main
-// styles.css.map  87 bytes       0  [emitted]         main
-// - when you compare the bundle.js and bundle.js map files after extracting styles.css is smaller in size.
-// link the style.css generated on the head tags in the index.html page so that the style.css file will ,load first before rendering the bundle.js file which is the javascript file like this
-// <link rel="stylesheet" type="text/css" href="./styles.css"/>
-// - let startup live-server to see that the css file are still working like this
-// C:\React-course-projects\xpensify-app6>yarn run serve
-// - open Network tab on the browser, click on All to see that the style.css is loading first before bundle.js whcich is the javascript file, click on css to view styles.css file
-// source-map for styles.css just like the way we use we use source-map for bundle.js file
-// delete all assets generate in public folder
-// shutdown live-server and start up dev-server for development like this
-// C:\React-course-projects\xpensify-app6>yarn run build:dev
-// use selector on the browser to click on DateRangePicker component you will see that the style.css is not pointing to the right line in code.
-// the source-map mis working in production mode because of source-map use in devtool in webpack.config.js file.
-// the source-map is not working in development mode becos of cheap-module-eval-source-map use in devtool property in webpack.config.js file to switch the development source map 
-// from devtool: isProduction ? "source-map" : "cheap-module-eval-source-map",
-// to devtool: isProduction ? "source-map" : "inline-source-map",
-// inline-source-map is a lighter bit lower for development.
-// enable source-map on use: ["css-loader", "sass-loader"], by switch use property to array of object like this
-// use: [
-//     {
-//         loader: "css-loader", 
-//         options: {sourceMap: true },
-//     },
-//     {
-//         loader: "sass-loader",
-//         options: {sourceMap: true}
-//     }
-// ], 
-// - after the above modification done on webpack.config.js file let re-startup dev-server
-// - you see that source-map is also working perfectly in development mode as well.
+// const webpack = require('webpack'); onto webpack.config.js file
+// modify plugins property in webpack.config.js file inorder to be able to use the firebaseConfig setup in both environment files in bundle.js like this
+// plugins:  [ 
+//   CSSExtract,
+//   new webpack.DefinePlugin({
+//     "process.env.FIREBASE_API_KEY": JSON.stringify(process.env.FIREBASE_API_KEY),
+//     "process.env.FIREBASE_AUTH_DOMAIN": JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+//     "process.env.FIREBASE_DATABASE_URL": JSON.stringify(process.env.FIREBASE_DATABASE_URL),
+//     "process.env.FIREBASE_PROJECT_ID": JSON.stringify(process.env.FIREBASE_PROJECT_ID),
+//     "process.env.FIREBASE_STORAGE_BUCKET": JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
+//     "process.env.FIREBASE_MESSAGING_SENDER_ID": JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
+//     "process.env.FIREBASE_APP_ID": JSON.stringify(process.env.FIREBASE_APP_ID),
+//     "process.env.FIREBASE_MEASUREMENT_ID": JSON.stringify(process.env.FIREBASE_MEASUREMENT_ID),
+//   })
+//  ],
+// next is to use the above environment variables in firebase/firebase.js file like this
+// const firebaseConfig = {
+//   apiKey: process.env.FIREBASE_API_KEY,
+//   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+//   databaseURL: process.env.FIREBASE_DATABASE_URL,
+//   projectId: process.env.FIREBASE_PROJECT_ID,
+//   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+//   appId: process.env.FIREBASE_APP_ID,
+//   measurementId: process.env.FIREBASE_MEASUREMENT_ID
+// };
+// open tests/setupTest.js for modification inorder to allow our test data to work by adding this line of code
+// import Dotenv from "dotenv";
+// Dotenv.config({ path: '.env.test' });
+// - completely delete both development and test database data.
+// - startup jest test suit
+// - view both db, you will see the db populated with dummy data while the development db has not data
 
-// push our code to github repository
-// - make sure you are not pushing both bundle.js and style.css onto github becos they are generated files.
-// C:\React-course-projects\xpensify-app6>git status
-// C:\React-course-projects\xpensify-app6>git add .
-// C:\React-course-projects\xpensify-app6>git commit -m "Setup production webpack build"
-// push local git respository to remote git respository with the below command
-// - go to your remote github to refresh the website inorder to see the new files push up remotely.
-
-// A Production Web Server with Express
-// We have different way to serve-up our app which are as following:
-// 1. live-server
-// 2. dev-server
-// the above servers are not suitable for production becos they consume more system resources like memory while express server is light weight server which will be responsible for serving-up our public folder in production.
-// express.js is a javascript library for developing server.
-// - create a folder called server in the root of the project
-// - create server/server.js file
-// - install express library like this
-// C:\React-course-projects\xpensify-app6>yarn add express@4.15.4
-// express server is going to run in the terminal not through webpack.
-// setup server.js file by importing express and create a new express application.
-// after setup basic express server 
-// const path = require("path"); // it is an in-built library
-// const express = require("express"); // importing express
-// const app = express(); // creating new instance of express
-// const publicPath = path.join(__dirname, "..", "public"); // serve-up public folder where u have bundle.js and style.css file
-// app.use(express.static(publicPath))
-// app.listen(3000, ()=>{
-//     console.log("server is up!");
-// });
-// then run it on terminal like this
-// C:\React-course-projects\xpensify-app6>node server/server.js
-// its return this server is up! on the terminal which means your server is working
-// go to this url http://localhost:3000/ on your browser
-// its throw an error becos it doesn't have access to bundle.js and style.css the assest to serve-up.
-// - startup product server like this
-// C:\React-course-projects\xpensify-app6>yarn run build:prod
-// re-run express server like this
-// C:\React-course-projects\xpensify-app6>node server/server.js
-// refresh to view your app on the browser
-// - click on create Expense tab and refresh the browser its will show this error
-// Cannot GET /create
-// this is becos their is not create file inside public folder
-// - to solve the issue we need to serve-up indes.html file anytime a page is request by a user inside server/server.js file like this
-// app.get("*", (req, res)=>{
-//     res.sendFile(path.join(publicPath, "index.html"));
-// });
-// - shutdown the express server and startup again like this
-// C:\React-course-projects\xpensify-app6>node server/server.js
-// click on Create Expense tab again and refresh the browser, you will see that the issue as being fixed
-
-// Deploying with Heroku
-// Heroku is a cloud platform for hosting both backend and frontend apps.
-// go to heroku.com, Login or Sign-Up
-// Login: username and password
-// Deployment to Heroku will be from the command line which is heroku cli
-// google search heroku cli, click on The Heroku CLI, click on Download and install, click 64-bit installer
-// Install Heroku cli
-// C:\React-course-projects\xpensify-app6>npm install -g heroku
-// C:\React-course-projects\xpensify-app6>heroku --version
-// C:\React-course-projects\xpensify-app6>heroku login
-// C:\React-course-projects\xpensify-app6>heroku create react-expensify18
-// it will use the above name to create url and github for you like this
-// url: https://react-expensify18.herokuapp.com/ | https://git.heroku.com/react-expensify18.git
-// C:\React-course-projects\xpensify-app6>git remote
-// heroku
-// origin
-// C:\React-course-projects\xpensify-app6>git remote -v
-// heroku  https://git.heroku.com/react-expensify18.git (fetch)
-// heroku  https://git.heroku.com/react-expensify18.git (push)
-// origin  https://github.com/Hussenat/react-filter2021.git (fetch)
-// origin  https://github.com/Hussenat/react-filter2021.git (push)
-// the above command give you more details on heroku and origin
-// to teach heroku how to startup express server
-// open package.json add start property on to scripts object like this
-// "start": "node server/server.js"
-// -open server/server.js to add dynamic port number which will be use by heroku becos http://localhost:3000/ is a local port number for development purpose.
-// const port = process.env.PORT || 3000;
-// the above line of code will make our express server compartiable with heroku.
-// - to teach heroku how to run webpack.config file
-// by adding this property "heroku-postbuild": "yarn run build:prod" onto script object in package.json
-// its will run webpack once, after our project dependencies has already being executed.
-// - add the following assests in public folder to gitignore file like this
-// public/bundle.js
-// public/bundle.js.map
-// public/styles.css
-// public/styles.css.map
-// C:\React-course-projects\xpensify-app6>git status
-// C:\React-course-projects\xpensify-app6>git add .
-// C:\React-course-projects\xpensify-app6>git commit -m "Setup production build and serve"
-// C:\React-course-projects\xpensify-app6>git push
-// C:\React-course-projects\xpensify-app6>git push heroku main
-// C:\React-course-projects\xpensify-app6>heroku open
+// Heroku Environment Variable
+// - we have already setup environment variable on testing and development.
+// - next is to setup environment variable in production on heroku command line.
+// NODE_ENV is automatically set to product on heroku
+// - we need to take all the variable setup in .env.development and set it up on heroku for the purpose of production.
+// C:\React-course-projects\xpensify-app7>heroku config
+// the above command print out all the environment variables on heroku but currently we don't have any environment variables, make sure ur internet is on while executing d above command
+// - setup firebaseConfig on heroku like this
+// C:\React-course-projects\xpensify-app7>heroku --version
+// C:\React-course-projects\xpensify-app7>heroku config -a react-project26
+// C:\React-course-projects\xpensify-app7>heroku config:set -a react-project26 FIREBASE_API_KEY=AIzaSyAuz1K-fcKV90XFbiWS9tqpnM4_YjJQGwU FIREBASE_AUTH_DOMAIN=xpensify0801.firebaseapp.com FIREBASE_DATABASE_URL=https://xpensify0801-default-rtdb.firebaseio.com FIREBASE_PROJECT_ID=xpensify0801 FIREBASE_STORAGE_BUCKET=xpensify0801.appspot.com FIREBASE_MESSAGING_SENDER_ID=679359801620 FIREBASE_APP_ID=1:679359801620:web:a5f5a97d0f6a3f675cfa01 FIREBASE_MEASUREMENT_ID=G-BXCZV2YXBP
+// C:\React-course-projects\xpensify-app7>heroku config -a react-project26
+// make sure to add space within the variable and properties
+// C:\React-course-projects\xpensify-app7>git status
+// you will see some files that you don't want to push to github, they are .env.test and .env.development
+// - open gitignore file to ignore those two files from github, then run git status again so as not to see the two files

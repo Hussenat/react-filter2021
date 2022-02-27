@@ -1,0 +1,8 @@
+Hosting Company Heroku.com
+username: orishameedah@gmail.com
+password: meedah7002*
+url: https://react-expensify21122021.herokuapp.com/
+in Heroku Hosting Company two or more people is allowed to use the same hosting folder or file e.g react-course-projects032021 
+But before another person is allow to use the folder one need to go to his or her the git dashboard then click on deploy
+and copy this heroku git:remote -a react-expensify21122021 for it to check
+also for safety if one is on done with the deployment one should always log in because the login session always expire

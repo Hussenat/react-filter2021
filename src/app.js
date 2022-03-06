@@ -7,17 +7,18 @@ import AppRouter from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 import "react-dates/lib/css/_datepicker.css";
 import { firebase } from "./firebase/firebase.js";
+import { startSetExpenses } from "./actions/expenses";
 // import "./playground/promises.js";
 
-//store
-const store = configureStore();
-// console.log("testing........");
-const jsx = (
-  <Provider store={store}>
-    <AppRouter />
-  </Provider>
-);
-ReactDOM.render(jsx, document.getElementById("app"));
+// //store
+// const store = configureStore();
+// // console.log("testing........");
+// const jsx = (
+//   <Provider store={store}>
+//     <AppRouter />
+//   </Provider>
+// );
+// ReactDOM.render(jsx, document.getElementById("app"));
 //- open each file that makeup the expensify app to remove unneceessary codes
 // C:\react-course-projects032021\xpensify-app7>npm run dev-server
 //C:\react-course-projects032021\xpensify-app7>npm run test --watch
@@ -36,7 +37,6 @@ ReactDOM.render(jsx, document.getElementById("app"));
 //- firebase database is a no sql database that look like javascript obect which contain properties and values
 //- click Realtime Database, click on Create button
 //- click on Rules tab inorder to change the rules from false to true
-
 //- cllck on Publish to save the new rules setting
 //- click on Project Overview
 //- go to Get Started by adding Firebase to your app then click on web </> icon
@@ -91,8 +91,7 @@ ReactDOM.render(jsx, document.getElementById("app"));
 
 //Firebase with Redux
 //- inorder to connect firebase with redux store we need to implement Asynchronous Redux Action
-//- when someone dispatch asynchronous action we shall update both edux store and firebase this will update the user
-// interface(UI) as well
+//- when someone dispatch asynchronous action we shall update both redux store and firebase this will update the user interface(UI) as well
 
 //Asynchronous Redux Action
 //- integrate all the fiirebase methods we have learnt onto redux store which are CRUDE operation
@@ -225,3 +224,81 @@ ReactDOM.render(jsx, document.getElementById("app"));
 // C:\React-course-projects\xpensify-app7>git status
 // you will see some files that you don't want to push to github, they are .env.test and .env.development
 // - open gitignore file to ignore those two files from github, then run git status again so as not to see the two files
+// C:\React-course-projects\xpensify-app7>git status
+// fatal: bad object HEAD
+// C:\React-course-projects\xpensify-app7>git init
+// C:\React-course-projects\xpensify-app7>git fetch
+// C:\React-course-projects\xpensify-app7>git status
+// C:\React-course-projects\xpensify-app7>git add .
+// C:\React-course-projects\xpensify-app7>git commit -m "setup test database environment variable"
+// C:\React-course-projects\xpensify-app7>git push
+// C:\React-course-projects\xpensify-app7>git push heroku main
+// remote: !       No such app as react-projects-xpensify.
+// fatal: repository 'https://git.heroku.com/react-projects-xpensify.git/' not found
+// C:\React-course-projects\xpensify-app7>git remote -v
+// C:\React-course-projects\xpensify-app7>git remote rm heroku
+// C:\React-course-projects\xpensify-app7>heroku create
+// C:\React-course-projects\xpensify-app7>heroku rename react-projects-xpensify
+// C:\React-course-projects\xpensify-app7>git push heroku main
+//  ! [remote rejected] main -> main (pre-receive hook declined)
+// error: failed to push some refs to 'https://git.heroku.com/react-projects-xpensify.git'
+// check each version from both node and npm like this 
+// C:\React-course-projects\xpensify-app7>node --version
+// C:\React-course-projects\xpensify-app7>npm --version
+// then do this on package.json
+// "engines": {
+//   "node": "14.x",
+//   "npm": "6.x"
+// }
+// C:\React-course-projects\xpensify-app7>heroku config:set -a react-projects-xpensify FIREBASE_API_KEY=AIzaSyAuz1K-fcKV90XFbiWS9tqpnM4_YjJQGwU FIREBASE_AUTH_DOMAIN=xpensify0801.firebaseapp.com FIREBASE_DATABASE_URL=https://xpensify0801-default-rtdb.firebaseio.com FIREBASE_PROJECT_ID=xpensify0801 FIREBASE_STORAGE_BUCKET=xpensify0801.appspot.com FIREBASE_MESSAGING_SENDER_ID=679359801620 FIREBASE_APP_ID=1:679359801620:web:a5f5a97d0f6a3f675cfa01 FIREBASE_MEASUREMENT_ID=G-BXCZV2YXBP
+// C:\React-course-projects\xpensify-app7>heroku config -a react-projects-xpensify
+// then i repeat the same process whereby init, status, add ., commit, push, heroku push main,
+// C:\React-course-projects\xpensify-app7>heroku open
+// the above command will open the app
+// https://react-projects-xpensify.herokuapp.com/
+// C:\React-course-projects\xpensify-app7>npm run dev-server 
+
+// Fetching expenses: Part I
+// - currently if you refresh the browser on both production and development app and the deployed app the data inserted on db
+// - will not re-render, that is why we need to fetch data from db for the purpose of re-rendering 
+// - open src/tests/actions/expenses.test.js file inorder to write test case to insert data onto test firebase like this
+// beforeEach((done) => {
+//   const expenseData = {};
+//   expenses.forEach(({ id, description, note, amount, createdAt })=>{
+//     expenseData[id] = { description, note, amount, createdAt };
+//   });
+
+//   database.ref(`users/${uid}/expenses`).set(expenseData).then(() => done());
+// });
+// - the above beforeEach() method will run before each asynchronous test cases.
+// - run jest test suite and open your test db immediately to see how to db the changes
+// - you will see that the dummy expenses array object will be inserted first before asynchronous test cases.
+// - open src/actions/expenses.js for writing code to fetch data from firebase which is setExpense() Action function.
+// - write test case for setExpenses Action function in tests/actions/expenses.test.js
+// - startup jest test suite
+// - open src/reducers/expenses.js file with its test file counterpart to setup setExpenses Action Function
+
+// Fetching Expenses: Part II
+// - open src/actions/expenses.js for writing code to fetch data from firebase which function is startSetExpenses() Asyn function
+// import { startSetExpenses } from "./actions/expenses";
+// - using startSetExpense function to fetch data from firebase on app.js like this
+//store
+const store = configureStore();
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+// - render loading on the browser while that data is still fetching from firebase
+ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById("app"));
+});
+
+// startup dev-server
+// - add test case for startSetExpenses() function inside tests/actions/expenses.test.js file
+// - startup jest test suite
+
+// - push to both local and remote github respository
+// C:\React-course-projects\xpensify-app7>git status
+// C:\React-course-projects\xpensify-app7>git commit -m  "Get Firebase expenses on start"

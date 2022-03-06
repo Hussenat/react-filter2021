@@ -33,10 +33,10 @@ import database from "../firebase/firebase";
 // });
 
 //local Action Generator
-export const addExpense = (expense) => ({
-  type: "ADD_EXPENSE",
-  expense,
-});
+// export const addExpense = (expense) => ({
+//   type: "ADD_EXPENSE",
+//   expense,
+// });
 
 //asynchronous ADD_EXPENSE Action Generator Function
 //- We need to do the following inside startAddExpense() function
@@ -45,33 +45,33 @@ export const addExpense = (expense) => ({
 //3. Use startAddExpense in AddExpensePage instead of addExpense action generator
 //4. Adjusst AddExpensePage test
 
-export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
-    const {
-      description = "",
-      note = "",
-      amount = 0,
-      createdAt = 0,
-    } = expenseData;
-    const expense = { description, note, amount, createdAt };
-    //return keyword beside the database means pass the data return in then() promise method to then() promise method to
-    //the test case, without it your test case will not be succesful
-    return database
-      .ref("expenses")
-      .push(expense)
-      .then((ref) => {
-        console.log(ref);
+// export const startAddExpense = (expenseData = {}) => {
+//   return (dispatch) => {
+//     const {
+//       description = "",
+//       note = "",
+//       amount = 0,
+//       createdAt = 0,
+//     } = expenseData;
+//     const expense = { description, note, amount, createdAt };
+//     //return keyword beside the database means pass the data return in then() promise method to then() promise method to
+//     //the test case, without it your test case will not be succesful
+//     return database
+//       .ref("expenses")
+//       .push(expense)
+//       .then((ref) => {
+//         console.log(ref);
 
-        //dispatch local Action Generator function to redux store
-        dispatch(
-          addExpense({
-            id: ref.key, //using ref.key which is the id from firebase in place of uuid()
-            ...expense,
-          })
-        );
-      });
-  };
-};
+//         //dispatch local Action Generator function to redux store
+//         dispatch(
+//           addExpense({
+//             id: ref.key, //using ref.key which is the id from firebase in place of uuid()
+//             ...expense,
+//           })
+//         );
+//       });
+//   };
+// };
 
 // //REMOVE_EXPENSE
 // export const removeExpense = ({ id } = {}) => ({
@@ -80,10 +80,10 @@ export const startAddExpense = (expenseData = {}) => {
 // });
 
 //local remove expense
-export const removeExpense = ({ id } = {}) => ({
-  type: "REMOVE_EXPENSE",
-  id,
-});
+// export const removeExpense = ({ id } = {}) => ({
+//   type: "REMOVE_EXPENSE",
+//   id,
+// });
 
 //Asynchronous REMOVE_EXPENSE Action Generator Function
 //- We need to do the following inside startAddExpense() function
@@ -92,16 +92,16 @@ export const removeExpense = ({ id } = {}) => ({
 //3. Use startRemoveExpense in EditExpensePage instead of removeExpense action generator
 //4. Adjusst EditExpensePage test
 
-export const startRemoveExpense = ({ id } = {}) => {
-  return (dispatch) => {
-    return database
-      .ref(`expenses/${id}`)
-      .remove()
-      .then(() => {
-        dispatch(removeExpense({ id }));
-      });
-  };
-};
+// export const startRemoveExpense = ({ id } = {}) => {
+//   return (dispatch) => {
+//     return database
+//       .ref(`expenses/${id}`)
+//       .remove()
+//       .then(() => {
+//         dispatch(removeExpense({ id }));
+//       });
+//   };
+// };
 
 //EDIT_EXPENSE
 // export const editExpense = (id, updates) => ({
@@ -111,11 +111,11 @@ export const startRemoveExpense = ({ id } = {}) => {
 // });
 
 //local edit expense
-export const editExpense = (id, updates) => ({
-  type: "EDIT_EXPENSE",
-  id,
-  updates,
-});
+// export const editExpense = (id, updates) => ({
+//   type: "EDIT_EXPENSE",
+//   id,
+//   updates,
+// });
 
 //Asynchronous EDIT_EXPENSE Action Generator Function
 //- We need to do the following inside startEditExpense() function
@@ -124,23 +124,23 @@ export const editExpense = (id, updates) => ({
 //3. Use startEditExpense in EditExpensePage instead of editExpense action generator
 //4. Adjust EditExpensePage test
 
-export const startEditExpense = (id, updates) => {
-  return (dispatch) => {
-    return database
-      .ref(`expenses/${id}`)
-      .updates(updates)
-      .then(() => {
-        dispatch(editExpense(id, updates));
-      });
-  };
-};
+// export const startEditExpense = (id, updates) => {
+//   return (dispatch) => {
+//     return database
+//       .ref(`expenses/${id}`)
+//       .updates(updates)
+//       .then(() => {
+//         dispatch(editExpense(id, updates));
+//       });
+//   };
+// };
 
 //Fetching data from both firebase and redux store
 //SET_EXPENSES
-export const setExpenses = (expenses) => ({
-  type: "SET_EXPENSES",
-  expenses,
-});
+// export const setExpenses = (expenses) => ({
+//   type: "SET_EXPENSES",
+//   expenses,
+// });
 
 //Asynchronous REMOVE_EXPENSE Action Generator Function
 //- We need to do the following inside startSetExpenses() function
@@ -148,24 +148,24 @@ export const setExpenses = (expenses) => ({
 //2. parse that data onto an array
 //3. dispatch SET_EXPENSE to redux store
 
-export const startSetExpenses = () => {
-  return (dispatch) => {
-    return database
-      .ref("expenses")
-      .once("value")
-      .then((snapshot) => {
-        const expenses = [];
+// export const startSetExpenses = () => {
+//   return (dispatch) => {
+//     return database
+//       .ref("expenses")
+//       .once("value")
+//       .then((snapshot) => {
+//         const expenses = [];
 
-        snapshot.forEach((childSnapshot) => {
-          expenses.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val(),
-          });
-        });
-        dispatch(setExpenses(expenses));
-      });
-  };
-};
+//         snapshot.forEach((childSnapshot) => {
+//           expenses.push({
+//             id: childSnapshot.key,
+//             ...childSnapshot.val(),
+//           });
+//         });
+//         dispatch(setExpenses(expenses));
+//       });
+//   };
+// };
 
 // //let add user to the root of the ref() to all async Action Generator Function like this
 // // users/${uuid}/expenses
@@ -176,34 +176,32 @@ export const startSetExpenses = () => {
 //   expense,
 // });
 
-// //asynchronous ADD_EXPENSE Action Generator Function
-// export const startAddExpense = (expenseData = {}) => {
-//   // getState() method is to fetch from redux store
-//   return (dispatch, getState) => {
-//     const uid = getState().auth.uid; //get the user id from redux store
-//     const {
-//       description = "",
-//       note = "",
-//       amount = 0,
-//       createdAt = 0,
-//     }  = expenseData;
-//     const expense = { description, note, amount, createdAt };
-//     return (
-//       database
-//     // .ref("expenses")
-//     .ref(`users/${uid}/expenses`)
-//     .push(expense)
-//     .then((ref)=>{
-//       dispatch(
-//         addExpense({
-//         id: ref.key,
-//         ...expense,
-//       })
-//       );
-//     })
-//     );
-//   };
-// };
+//asynchronous ADD_EXPENSE Action Generator Function
+export const startAddExpense = (expenseData = {}) => {
+  return (dispatch) => {
+    const {
+      description = "",
+      note = "",
+      amount = 0,
+      createdAt = 0,
+    }  = expenseData;
+    const expense = { description, note, amount, createdAt };
+    return (
+      database
+    .ref("expenses")
+    // .ref(`users/${uid}/expenses`)
+    .push(expense)
+    .then((ref)=>{
+      dispatch(
+        addExpense({
+        id: ref.key,
+        ...expense,
+      })
+      );
+    })
+    );
+  };
+};
 // //- let test the app by starting the dev-server then insert data to firebase db to view if its works.
 // //- click on
 
@@ -213,11 +211,11 @@ export const startSetExpenses = () => {
 // //   id,
 // // });
 
-// //local remove expense
-// export const removeExpense = ({ id } = {}) => ({
-//   type: "REMOVE_EXPENSE",
-//   id,
-// });
+//local remove expense
+export const removeExpense = ({ id } = {}) => ({
+  type: "REMOVE_EXPENSE",
+  id,
+});
 
 // //Asynchronous REMOVE_EXPENSE Action Generator Function
 // //- We need to do the following inside startAddExpense() function
@@ -226,16 +224,16 @@ export const startSetExpenses = () => {
 // //3. Use startRemoveExpense in EditExpensePage instead of removeExpense action generator
 // //4. Adjusst EditExpensePage test
 
-// export const startRemoveExpense = ({ id } = {}) => {
-//   return (dispatch) => {
-//     return database
-//     .ref(`expenses/${id}`)
-//     .remove()
-//     .then(() => {
-//       dispatch(removeExpense({ id }));
-//     })
-//   }
-// }
+export const startRemoveExpense = ({ id } = {}) => {
+  return (dispatch) => {
+    return database
+    .ref(`expenses/${id}`)
+    .remove()
+    .then(() => {
+      dispatch(removeExpense({ id }));
+    })
+  }
+}
 
 // //EDIT_EXPENSE
 // // export const editExpense = (id, updates) => ({
@@ -245,11 +243,11 @@ export const startSetExpenses = () => {
 // // });
 
 // //local edit expense
-// export const editExpense = (id, updates) => ({
-//   type: "EDIT_EXPENSE",
-//   id,
-//   updates,
-// });
+export const editExpense = (id, updates) => ({
+  type: "EDIT_EXPENSE",
+  id,
+  updates,
+});
 
 // //Asynchronous EDIT_EXPENSE Action Generator Function
 // //- We need to do the following inside startEditExpense() function
@@ -258,23 +256,23 @@ export const startSetExpenses = () => {
 // //3. Use startEditExpense in EditExpensePage instead of editExpense action generator
 // //4. Adjust EditExpensePage test
 
-// export const startEditExpense = (id, updates) => {
-//   return (dispatch) => {
-//     return database
-//     .ref(`expenses/${id}`)
-//     .updates(updates)
-//     .then(() => {
-//       dispatch(editExpense(id, updates))
-//     })
-//   }
-// }
+export const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    return database
+    .ref(`expenses/${id}`)
+    .updates(updates)
+    .then(() => {
+      dispatch(editExpense(id, updates))
+    })
+  }
+}
 
-// //Fetching data from both firebase and redux store
-// //SET_EXPENSES
-// export const setExpenses = (expenses) => ({
-//   type: "SET_EXPENSES",
-//   expenses,
-// })
+//Fetching data from both firebase and redux store
+//SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type: "SET_EXPENSES",
+  expenses,
+})
 
 // //Asynchronous REMOVE_EXPENSE Action Generator Function
 // //- We need to do the following inside startSetExpenses() function
@@ -282,21 +280,21 @@ export const startSetExpenses = () => {
 // //2. parse that data onto an array
 // //3. dispatch SET_EXPENSE to redux store
 
-// export const startSetExpenses = ()=>{
-//   return (dispatch)=>{
-//     return database.ref("expenses").once("value").then((snapshot) => {
-//       const expenses = [];
+export const startSetExpenses = ()=>{
+  return (dispatch)=>{
+    return database.ref("expenses").once("value").then((snapshot) => {
+      const expenses = [];
 
-//       snapshot.forEach((childSnapshot) => {
-//         expenses.push({
-//           id: childSnapshot.key,
-//           ...childSnapshot.val(),
-//         });
-//       });
-//       dispatch(setExpenses(expenses))
-//     })
-//   }
-// }
+      snapshot.forEach((childSnapshot) => {
+        expenses.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val(),
+        });
+      });
+      dispatch(setExpenses(expenses))
+    })
+  }
+}
 
 //let add user to the root of the ref() to all async Action Generator Function like this
 // users/${uuid}/expenses

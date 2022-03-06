@@ -311,5 +311,12 @@ store.dispatch(startSetExpenses()).then(() => {
 // - write the test case for startRemoveExpense Async Action Function inside tests/actions/expenses.test.js file and import startRemoveExpense onto expense.test.js
 // startup jest test suite
 // implement startRemoveExpense onto the EditExpensePage component by opening EditExpensePage.js file using startRemoveExpense Async Action Function in place of removeExpense Action Function.
-// 
+// open tests/components/EditExpensePage.test.js file inorder to use startRemoveExpense Async Action Function in place of removeExpense Action Function.
 // startup dev-server inorder to actually delete one data on firebase db.
+
+// - push to both local and remote github respository
+// C:\React-course-projects\xpensify-app7>git status
+// C:\React-course-projects\xpensify-app7>git commit -am  "Get Firebase expenses on start" to add and commit at d same time
+// C:\React-course-projects\xpensify-app7>git push 
+// C:\React-course-projects\xpensify-app7>git push heroku main
+// C:\React-course-projects\xpensify-app7>heroku open

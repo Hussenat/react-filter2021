@@ -193,7 +193,7 @@ export const startAddExpense = (expenseData = {}) => {
     .push(expense)
     .then((ref)=>{
       dispatch(
-        addExpense({
+        startAddExpense({
         id: ref.key,
         ...expense,
       })

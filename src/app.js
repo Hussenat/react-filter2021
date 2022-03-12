@@ -320,3 +320,20 @@ store.dispatch(startSetExpenses()).then(() => {
 // C:\React-course-projects\xpensify-app7>git push 
 // C:\React-course-projects\xpensify-app7>git push heroku main
 // C:\React-course-projects\xpensify-app7>heroku open
+
+// Update Expense
+// - create startEditExpense Async Action Function inside src/actions/expenses.js file.
+// - write the test case for startEditExpense Async Action Function inside tests/actions/expenses.test.js file and import startEditExpense onto expenses.test.js file
+// startup jest test suite
+// C:\React-course-projects\xpensify-app7>yarn run test -- --watch
+// - implement startEditExpense onto EditExpensePage component by opening EditExpensePage.js file using startEditExpense Async Function in place of editExpense Action Function
+// open tests/components/EditExpensePage.test.js file inorder to use startEditExpense Async Action Function in place of editExpense Action Function.
+// - startup jest test suite
+// - startup dev-server inorder to actually edit one data on firebase db.
+
+// - push to both local and remote github respository
+// C:\React-course-projects\xpensify-app7>git status
+// C:\React-course-projects\xpensify-app7>git commit -am  "Add startEditExpense" to add and commit at d same time
+// C:\React-course-projects\xpensify-app7>git push 
+// C:\React-course-projects\xpensify-app7>git push heroku main
+// C:\React-course-projects\xpensify-app7>heroku open

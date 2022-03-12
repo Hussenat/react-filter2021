@@ -171,10 +171,10 @@ import database from "../firebase/firebase";
 // // users/${uuid}/expenses
 
 //local Action Generator
-// export const addExpense = (expense) => ({
-//   type: "ADD_EXPENSE",
-//   expense,
-// });
+export const addExpense = (expense) => ({
+  type: "ADD_EXPENSE",
+  expense,
+});
 
 //asynchronous ADD_EXPENSE Action Generator Function
 export const startAddExpense = (expenseData = {}) => {
@@ -193,7 +193,7 @@ export const startAddExpense = (expenseData = {}) => {
     .push(expense)
     .then((ref)=>{
       dispatch(
-        startAddExpense({
+        addExpense({
         id: ref.key,
         ...expense,
       })
@@ -260,7 +260,7 @@ export const startEditExpense = (id, updates) => {
   return (dispatch) => {
     return database
     .ref(`expenses/${id}`)
-    .updates(updates)
+    .update(updates)
     .then(() => {
       dispatch(editExpense(id, updates))
     })

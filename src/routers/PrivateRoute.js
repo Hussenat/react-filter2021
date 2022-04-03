@@ -53,5 +53,4 @@ export default connect(mapStateToProps)(PrivateRoute);
 //     </div>
 //   )
 //- restartup the dev-server to see that the Header component is no more on the LoginPage but
-//its still on the other components when you login beco's we have added to the PrivateRoute
-//component.
+//its still on the other components when you login beco's we have added to the PrivateRoute components.

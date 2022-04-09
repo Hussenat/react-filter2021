@@ -705,8 +705,7 @@ firebase.auth().onAuthStateChanged((user) => {
 //const uid = "thisismytestuid"; and use it in the root ref() method
 //const defaultAuthState = { auth: { uid } };
 //- startup jest test suit
-//- the issue now is that the data is not yet private to individual user, its still access to
-//all the users.
+//- the issue now is that the data is not yet private to individual user, its still access to all the users.
 //- to make the data in db private will need to resetup the firebase RULE do this
 // {
 //   "rules": {

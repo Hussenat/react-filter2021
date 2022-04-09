@@ -669,8 +669,7 @@ firebase.auth().onAuthStateChanged((user) => {
 //</NavLink>
 
 //Private Firebase Data
-//- its means that each user can create and manage their own data inside firebase db by setting
-//the RULES.
+//- its means that each user can create and manage their own data inside firebase db by setting the RULES.
 //- open firebase.google.com, click Realtime Database to view the current structure of your db.
 //- this is how the currect db structure like
 // const db = {

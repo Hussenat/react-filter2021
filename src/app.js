@@ -726,12 +726,12 @@ firebase.auth().onAuthStateChanged((user) => {
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>git status
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>git add .
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>git commit -m "Store user data in user area"
-//- C:\ComputerD\react-course-projects032021\xpensify-app7>git push
+//- C:\ComputerD\react-course-projects032021\xpensify-app7>git push https://github.com/Hussenat/react-filter2021.git
 //the above command will push to remote git repository
-//C:\ComputerD\react-course-projects032021\xpensify-app7>git push heroku main
+//C:\ComputerD\react-course-projects032021\xpensify-app7>git push heroku master
 //the above command will redeploy your app to heroku web hosting site
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>heroku open
-//its will open your web on this url https://react-expensify192021.herokuapp.com/
+//its will open your web on this url https://react-project26.herokuapp.com/
 
 //Data Validation and Deployment
 //- validating the data store in the firebase db.
@@ -791,13 +791,13 @@ firebase.auth().onAuthStateChanged((user) => {
 //- push to both local and remote github repository
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>git status
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>git add .
-//- C:\ComputerD\react-course-projects032021\xpensify-app7>git commit -m "setup firebase Rule"
-//- C:\ComputerD\react-course-projects032021\xpensify-app7>git push
+//- C:\ComputerD\react-course-projects032021\xpensify-app7>git commit -m "Setup firebase rule"
+//- C:\ComputerD\react-course-projects032021\xpensify-app7>git push https://github.com/Hussenat/react-filter2021.git
 //the above command will push to remote git repository
-//C:\ComputerD\react-course-projects032021\xpensify-app7>git push heroku main
+//C:\ComputerD\react-course-projects032021\xpensify-app7>git push heroku master
 //the above command will redeploy your app to heroku web hosting site
 //- C:\ComputerD\react-course-projects032021\xpensify-app7>heroku open
-//its will open your web on this url https://react-expensify19112021.herokuapp.com/
+//its will open your web on this url https://react-project26.herokuapp.com/
 
 //- after the deployment of app to heroku, go the url to request for the app its will not work
 //becos we have not enable Authentication of the deployed url on firebase
